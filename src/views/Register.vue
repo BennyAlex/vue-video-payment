@@ -82,7 +82,7 @@ export default class App extends Vue {
         const json = await response.json()
 
         if (response.ok) {
-          this.snackbar.text = 'Successfully registed, please login now!'
+          this.snackbar.text = 'Successfully registed, you must confirm your email first before you can login!'
           this.snackbar.color = 'success'
           this.error = ''
         } else {
