@@ -42,8 +42,8 @@
 
       <v-divider style="border-top-width: 1.3px"/>
 
-      <v-card-text style="font-size: 17px" class="black--text pa-9 mt-3">
-
+      <v-card-text style="font-size: 18px" class="black--text pa-9 mt-3">
+        
         <router-view/>
 
       </v-card-text>

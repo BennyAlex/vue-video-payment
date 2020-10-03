@@ -1,3 +1,6 @@
+/**
+ * rules for input validation
+ */
 const rules = {
     required: (v: string) => !!v || 'Required',
     mail: (v: string) => /.+@.+/.test(v) || 'Mail does not look valid',
