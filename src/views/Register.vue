@@ -63,8 +63,10 @@ export default class App extends Vue {
   }
 
   private async register() {
-    if (this.$refs['form'].validate()) {
-      const match = this.$rules.match(this.password1, this.password2)
+    if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+      // const match = (this as Vue & { $rules: {match: (v1: string, v2: string) => boolean | string }}).match(this.password1, this.password2)
+      // @ts-ignore
+      const match =  this.$rules.match(this.password1, this.password2)
       if (match === true) {
         const response = await fetch('https://spect8-streams-backend.dev.vaudience.net/api/auth/signup', {
           method: 'POST',
@@ -96,7 +98,7 @@ export default class App extends Vue {
 
         return
       } else {
-        this.error = match
+        this.error = match as string
       }
     }
   }

@@ -54,7 +54,7 @@ export default class App extends Vue {
   }
 
   private async login() {
-    if (this.$refs['form'].validate()) {
+    if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
 
       const response = await fetch('https://spect8-streams-backend.dev.vaudience.net/api/auth/signin', {
         method: 'POST',
@@ -70,6 +70,8 @@ export default class App extends Vue {
       const json = await response.json()
 
       if (response.ok) {
+        //(this as Vue & { $store: {user: object }}).$store.user = json
+        // @ts-ignore
         this.$store.user = json
         this.snackbar.text = 'Successfully logged in!'
         this.snackbar.color = 'success'

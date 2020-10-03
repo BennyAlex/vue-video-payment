@@ -12,8 +12,8 @@ import {Component, Prop, Vue} from 'vue-property-decorator'
   name: "password-input"
 })
 export default class App extends Vue {
-  @Prop(Boolean) error: boolean
-  @Prop(String) value: string
+  @Prop(Boolean) error = false
+  @Prop(String) value = ''
 
   private show = false
 

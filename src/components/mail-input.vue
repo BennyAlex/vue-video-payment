@@ -12,8 +12,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator'
   name: "mail-input"
 })
 export default class App extends Vue {
-
-  @Prop(String) value: string
+  @Prop(String) value = ''
 
   get input() {
     return this.value
