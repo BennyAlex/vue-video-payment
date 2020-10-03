@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <v-form ref="form">
+    <v-form ref="form" @submit.prevent="register">
       <v-text-field label="Username" placeholder="SuperMario"  outlined rounded
                     v-model="username" type="text"
                     :rules="[$rules.required]"
@@ -17,7 +17,7 @@
       </div>
 
       <v-row justify="center">
-        <v-btn color="primary" class="mr-0" large @click="register">Register</v-btn>
+        <v-btn color="primary"  large @click="register" type="submit">Register</v-btn>
       </v-row>
     </v-form>
 
@@ -84,9 +84,11 @@ export default class App extends Vue {
         if (response.ok) {
           this.snackbar.text = 'Successfully registed, please login now!'
           this.snackbar.color = 'success'
+          this.error = ''
         } else {
           this.snackbar.text = 'Error while trying to register!'
           this.snackbar.color = 'error'
+          this.error = json.message
           console.log('register error:', json)
         }
 

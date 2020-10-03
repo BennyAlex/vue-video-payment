@@ -1,12 +1,16 @@
 <template>
   <div class="login">
-    <v-form ref="form">
+    <v-form ref="form" @submit.prevent="login">
       <mail-input v-model="mail"/>
 
       <password-input v-model="password"/>
 
+      <div class="error--text text-center mb-4" v-if="error">
+        {{ error }}
+      </div>
+
       <v-row justify="center">
-        <v-btn color="primary" class="mr-0" large @click="login">Login</v-btn>
+        <v-btn color="primary" large @click="login" type="submit">Login</v-btn>
       </v-row>
     </v-form>
 
@@ -41,6 +45,7 @@ import MailInput from "@/components/mail-input.vue";
 export default class App extends Vue {
   private mail = ''
   private password = ''
+  private error = ''
 
   private snackbar = {
     show: false,
@@ -57,8 +62,8 @@ export default class App extends Vue {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          password: "8dhNw2-aai^2$",
-          loginId: "dk@cheergg.com"
+          password: this.password,
+          loginId: this.mail
         })
       })
 
@@ -68,9 +73,11 @@ export default class App extends Vue {
         this.$store.user = json
         this.snackbar.text = 'Successfully logged in!'
         this.snackbar.color = 'success'
+        this.error = ''
       } else {
         this.snackbar.text = 'Error while trying to login!'
         this.snackbar.color = 'error'
+        this.error = json.message
         console.log('login error:', json)
       }
 
